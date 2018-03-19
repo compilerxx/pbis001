@@ -14,13 +14,12 @@ return [
     'type'            => 'mysql',
     // 服务器地址
     //'hostname'        => '127.0.0.1',
-    'hostname'        => '120.79.90.185',
     // 数据库名
     'database'        => 'bsd000',
     // 用户名
     'username'        => 'root',
     // 密码
-    'password'        => '@user123',
+    'password'        => '',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
