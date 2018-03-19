@@ -1,6 +1,8 @@
 <?php
 namespace app\index\controller;
 
+//http://120.79.90.185/pbis001/public/hello/jason
+
 class Index
 {
     public function index()
