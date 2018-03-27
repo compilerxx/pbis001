@@ -18,6 +18,15 @@ class ProductModel extends BaseModel
         'category_id','create_time','update_time'];
     //pivot 是 根据 table theme_product 生成的。
 
+    public function imgs(){
+        //记得加return 返回结果，否则会报错。
+        return $this->hasMany('ProductImageModel','product_id','id');
+    }
+
+    public function properties(){
+        return $this->hasMany('ProductPropertyModel','product_id','id');
+    }
+
     public function getMainImgUrlAttr($value,$data){ // table product field main_img_url field ?
 
         return $this->concatImaUrl($value,$data); //调用基类方法
@@ -33,5 +42,19 @@ class ProductModel extends BaseModel
         $products = self::where('category_id','=',$categoryID)
             ->select();
         return $products;
+    }
+
+    public static function getProductDetail($id){
+//        $product = self::with(['imgs.imgUrl','properties'])->find($id);
+//        $product = self::with(['imgs.imgUrl'])->with(['properties'])->find($id); //如何对关联模型进行排序；
+        $product = self::with([
+            'imgs' =>function($query){
+              $query->with(['imgUrl'])->order('order','asc');
+            }
+            ])
+            ->with(['properties'])->find($id);
+
+
+        return $product;
     }
 }

@@ -52,7 +52,20 @@ class Product
         $products = $products->hidden(['summary']);
 
         return $products;
+    }
 
-
+    /**
+     * @param $id
+     * @return array|null|\PDOStatement|string|\think\Model
+     * @throws ProductException
+     * @url   bis.com/api/v1/product/2
+     */
+    public function getOne($id){
+        (new IDMustBePositiveInt()) -> goCheck();
+        $product = ProductModel::getProductDetail($id);
+        if (!$product){
+            throw new ProductException();
+        }
+        return $product;
     }
 }

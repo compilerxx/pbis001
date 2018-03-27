@@ -21,6 +21,7 @@ class Banner
     /**
      * 获取指定id的banner信息
      * @url /banner/:id  http://bis.com/api/v1/banner/1
+     * http://120.79.90.185/pbis001/public/api/v1/banner/1
      * @http GET
      * @id banner 的id 号
      */
