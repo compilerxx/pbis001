@@ -59,6 +59,7 @@ Route::get('api/:version/category/all','api/:version.Category/getAllCategories')
 
 Route::post('api/:version/token/user','api/:version.Token/getToken');
 //注意这里使用post，通过body传入$code 参数，安全性稍好点
+Route::post('api/:version/token/verify','api/:version.Token/verifyToken');
 
 Route::post('api/:version/address','api/:version.Address/createOrUpdateAddress');
 

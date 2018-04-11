@@ -11,6 +11,8 @@ namespace app\api\controller\v1;
 
 use app\api\service\UserToken;
 use app\api\validate\TokenGet;
+use app\lib\exception\ParameterException;
+use app\api\service\Token as TokenService;
 
 class Token
 {
@@ -26,6 +28,16 @@ class Token
 
         return [ //不要直接retun $token 字符串。 可以返回数组形式，tp5框架会默认把数组序列化成json 再return
             'token' => $token
+        ];
+    }
+
+    public function verifyToken($token=''){
+        if (!$token){
+            throw new ParameterException(['token 不能为空']);
+        }
+        $valid = TokenService::verifyToken($token);
+        return [
+          'isValid' => $valid
         ];
     }
 
