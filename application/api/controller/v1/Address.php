@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\api\controller\BaseController;
+use app\api\model\UserAddressModel;
 use app\api\model\UserModel;
 use app\api\service\Token as TokenService;
 use app\api\validate\AddressNew;
@@ -20,7 +21,7 @@ use app\lib\exception\UserException;
 class Address extends BaseController  //为了使用tp5的前置方法，需要继承tp5基类 Controller。
 {
     protected $beforeActionList = [ //Controller 的成员变量
-        'checkPrimaryScope' => ['only'=>'createOrUpdateAddress'] //执行 createOrUpdateAddress 之前先执行前置方法 checkPrimaryScope
+        'checkPrimaryScope' => ['only'=>'createOrUpdateAddress,getUserAddress'] //执行 createOrUpdateAddress 之前先执行前置方法 checkPrimaryScope
     ];
 
 // 该方法已提取到基类 BaseController
@@ -37,7 +38,17 @@ class Address extends BaseController  //为了使用tp5的前置方法，需要�
 //        }
 //    }
 
-
+    public function getUserAddress(){
+        $uid = TokenService::getCurrentUid();
+        $userAddress = UserAddressModel::where('user_id',$uid) -> find();
+        if (!$userAddress){
+            throw new UserException([
+                'msg' => '用户地址不存在',
+                'errorCode' => 60001
+            ]);
+        }
+        return $userAddress;
+    }
 
     /**
      * @return SuccessMessage
