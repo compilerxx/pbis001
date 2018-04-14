@@ -20,5 +20,5 @@ return [
     'path'  => '',
     // 日志记录级别
 //    'level' => ['sql'],
-    'level' => [],
+    'level' => ['sql','error'],
 ];
