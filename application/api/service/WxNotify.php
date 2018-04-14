@@ -16,8 +16,9 @@ use think\Db;
 use think\Exception;
 use think\facade\Log;
 
-require __DIR__ . '/../../../extend/WxPay/WxPay.Api.php';  //__DIR__ 是指本文件Pay.php 所在的目录
+//require __DIR__ . '/../../../extend/WxPay/WxPay.Api.php';  //__DIR__ 是指本文件Pay.php 所在的目录
 //WxPayNotify 类是在WxNotify.php 中的，但require  WxPay.Api.php ，因为WxPay.Api.php中包括WxNotify.php
+include dirname(dirname(dirname(__DIR__))) . "/extend/WxPay/WxPay.Api.php";
 
 class WxNotify extends \WxPayNotify
 {

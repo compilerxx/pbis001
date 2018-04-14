@@ -20,8 +20,11 @@ use think\facade\Log;
 
 
 //Loader::import() , TP5.1 已经取消该方法，可以用php内置的include或者require语法
-require __DIR__ . '/../../../extend/WxPay/WxPay.Api.php';  //__DIR__ 是指本文件Pay.php 所在的目录
+//require __DIR__ . '/../../../extend/WxPay/WxPay.Api.php';  //__DIR__ 是指本文件Pay.php 所在的目录
 //require_once __DIR__ . '/../../../extend/WxPay/WxPay.Api.php';
+//include '../../../extend/WxPay/WxPay.Api.php';
+
+include dirname(dirname(dirname(__DIR__))) . "/extend/WxPay/WxPay.Api.php";
 
 class Pay
 {
@@ -77,7 +80,7 @@ class Pay
             Log::record($wxOrder,'error');
             Log::record('获取预支付订单失败','error');
         }
-        //prepay_id
+        //prepay_id 只有$wxOrder 'SUCCESS'时才会有prepay_id
         $this->recordPreOrder($wxOrder);
         $signature = $this->sign($wxOrder);
         return $signature;
